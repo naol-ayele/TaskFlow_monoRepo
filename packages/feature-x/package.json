@@ -1,0 +1,14 @@
+{
+  "name": "@taskflow/feature-x",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@taskflow/ui": "workspace:*",
+    "@taskflow/utils": "workspace:*",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@taskflow/typescript-config": "workspace:*",
+    "typescript": "^5"
+  }
+}

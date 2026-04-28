@@ -1,0 +1,9 @@
+{
+  "extends": "@taskflow/typescript-config/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@taskflow/ui/*": ["./src/*"] }
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}
