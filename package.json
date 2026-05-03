@@ -8,12 +8,6 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
-  "devDependencies": {
-    "@taskflow/typescript-config": "workspace:*",
-    "prettier": "^3.5.1",
-    "turbo": "^2.9.6",
-    "typescript": "5.7.3"
-  },
   "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=20"
@@ -22,5 +16,8 @@
     "ignoredBuiltDependencies": [
       "better-sqlite3"
     ]
+  },
+  "devDependencies": {
+    "turbo": "^2.9.6"
   }
 }
