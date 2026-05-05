@@ -6,6 +6,7 @@ import cors from "cors";
 import { taskRouter } from "./routes/tasks";
 import { noteRouter } from "./routes/notes";
 import { pomodoroRouter } from "./routes/pomodoro";
+import { messageRouter } from "./routes/messages";
 
 
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/tasks", taskRouter);
 app.use("/api/notes", noteRouter);
 app.use("/api/pomodoro", pomodoroRouter);
+app.use("/api/messages", messageRouter);
 
 
 const PORT = 3005;
