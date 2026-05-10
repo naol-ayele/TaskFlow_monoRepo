@@ -1,0 +1,8 @@
+{
+  "extends": "@taskflow/typescript-config/base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*"]
+}
