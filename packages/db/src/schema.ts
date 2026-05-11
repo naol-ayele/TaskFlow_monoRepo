@@ -6,7 +6,8 @@ export const users = sqliteTable("users", {
   email: text("email").notNull().unique(),
   avatarUrl: text("avatar_url"),
   createdAt: integer("created_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
 });
 
 export const tasks = sqliteTable("tasks", {
@@ -14,26 +15,36 @@ export const tasks = sqliteTable("tasks", {
   title: text("title").notNull(),
   description: text("description"),
   status: text("status", { enum: ["todo", "in_progress", "done"] })
-    .notNull().default("todo"),
+    .notNull()
+    .default("todo"),
   priority: text("priority", { enum: ["low", "medium", "high"] })
-    .notNull().default("medium"),
+    .notNull()
+    .default("medium"),
   dueDate: integer("due_date", { mode: "timestamp" }),
-  createdBy: text("created_by").notNull().references(() => users.id),
+  createdBy: text("created_by")
+    .notNull()
+    .references(() => users.id),
   assignedTo: text("assigned_to").references(() => users.id),
   createdAt: integer("created_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
 });
 
 export const taskComments = sqliteTable("task_comments", {
   id: text("id").primaryKey(),
-  taskId: text("task_id").notNull()
+  taskId: text("task_id")
+    .notNull()
     .references(() => tasks.id, { onDelete: "cascade" }),
-  authorId: text("author_id").notNull().references(() => users.id),
+  authorId: text("author_id")
+    .notNull()
+    .references(() => users.id),
   body: text("body").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
 });
 
 export const notes = sqliteTable("notes", {
@@ -41,22 +52,43 @@ export const notes = sqliteTable("notes", {
   title: text("title").notNull(),
   body: text("body").notNull().default(""),
   isShared: integer("is_shared", { mode: "boolean" }).notNull().default(false),
-  createdBy: text("created_by").notNull().references(() => users.id),
+  createdBy: text("created_by")
+    .notNull()
+    .references(() => users.id),
   createdAt: integer("created_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
 });
 
 export const pomodoroSessions = sqliteTable("pomodoro_sessions", {
   id: text("id").primaryKey(),
-  userId: text("user_id").notNull().references(() => users.id),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
   taskId: text("task_id").references(() => tasks.id),
   durationMinutes: real("duration_minutes").notNull().default(25),
   type: text("type", { enum: ["focus", "short_break", "long_break"] })
-    .notNull().default("focus"),
+    .notNull()
+    .default("focus"),
   completedAt: integer("completed_at", { mode: "timestamp" })
-    .$defaultFn(() => new Date()).notNull(),
+    .$defaultFn(() => new Date())
+    .notNull(),
+});
+
+export const messages = sqliteTable("messages", {
+  id: text("id").primaryKey(),
+  body: text("body").notNull(),
+  authorId: text("author_id")
+    .notNull()
+    .references(() => users.id),
+  relatedId: text("related_id"), // optional — link to task or note
+  relatedType: text("related_type", { enum: ["task", "note"] }),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .$defaultFn(() => new Date())
+    .notNull(),
 });
 
 export type User = typeof users.$inferSelect;
@@ -69,3 +101,5 @@ export type Note = typeof notes.$inferSelect;
 export type NewNote = typeof notes.$inferInsert;
 export type PomodoroSession = typeof pomodoroSessions.$inferSelect;
 export type NewPomodoroSession = typeof pomodoroSessions.$inferInsert;
+export type Message = typeof messages.$inferSelect;
+export type NewMessage = typeof messages.$inferInsert;
