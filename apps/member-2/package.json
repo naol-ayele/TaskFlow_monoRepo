@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@taskflow/db": "workspace:^",
     "@taskflow/feature-x": "workspace:^",
     "@taskflow/feature-y": "workspace:^",
+    "@taskflow/feature-z": "workspace:^",
     "@taskflow/ui": "workspace:^",
     "@taskflow/utils": "workspace:^",
+    "lucide-react": "^0.475.0",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
